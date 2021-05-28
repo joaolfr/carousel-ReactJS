@@ -5,11 +5,13 @@ import useHome from './hooks'
 
 const Home = () => {
 
-    const {SliderData, currentPage, rightDisabled, leftDisabled, back, next} = useHome()
+    const {SliderData, currentPage, rightDisabled, leftDisabled, back, next, loading} = useHome()
   
     return(
         <Wrapper>
-         
+         {loading && <span>Loading Images...</span>}
+         {!loading && (
+             <>
          {SliderData.map((block, index) => (
 
              <ImagesWrapper key={index} currentPage={currentPage} index={index} block={block} />
@@ -17,7 +19,8 @@ const Home = () => {
           ) )}
 
             <Pager leftDisabled={leftDisabled} rightDisabled={rightDisabled} currentPage={currentPage} back={back} next={next} SliderData={SliderData}/>
-            
+            </>
+         )}
 
         </Wrapper>
     )
